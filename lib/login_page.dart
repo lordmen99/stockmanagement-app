@@ -1,46 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:async/async.dart';
 import 'dart:io';
 import 'dart:convert';
+import './models/json_response.dart';
+import 'package:async/async.dart';
 
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-
-
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final _myController = TextEditingController();
+  final _emailFieldController = TextEditingController();
+  final _passwordFieldController = TextEditingController();
+  Future<LoginResponse> _loginResponse;
 
+  bool _isLoggedIn = false;
 
-  Future<Map<String, dynamic>> _sendLoginRequest() async {
+  Future<LoginResponse> _sendLoginRequest({Map body}) async {
     var url = "http://10.0.2.2:8000/api/auth/login";
-    debugPrint("hahah");
-    var response = await http.post(url, headers: {
-      HttpHeaders.contentTypeHeader: 'application/json',
-    }, body: jsonEncode({
-      'email': 'postmanm@me.com',
-      'password': '12345678'
-    }));
 
-    if(response.statusCode == 200){
+    var response = await http.post(url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+        body: jsonEncode(body));
+
+    if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body);
-      return jsonResponse;
+      setState(() {
+        _isLoggedIn = true;
+      });
+      return LoginResponse.fromJson(jsonResponse);
     }
 
-    throw Exception("Failed to send post api");
-
-
+//    throw Exception("Failed to send post api");
   }
-
-
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Login page"),
@@ -71,11 +70,12 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         hintText: "email",
                       ),
+                      controller: _emailFieldController,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 10),
                       child: TextFormField(
-                        controller: _myController,
+                        controller: _passwordFieldController,
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter your password';
@@ -90,35 +90,58 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     RaisedButton(
-                      onPressed: () {
-//                         Validate returns true if the form is valid, otherwise false.
-                        if (_formKey.currentState.validate()) {
-//                          print(_myController.text);
+                      onPressed: (){
 
+
+                        if(_formKey.currentState.validate()){
+                           _loginResponse = _sendLoginRequest(body: {
+                            "email": _emailFieldController.toString(),
+                            "password": _passwordFieldController.toString()
+                          });
+                          setState(() {
+                            print(_loginResponse.then((value){print(value.accessToken);}));
+                            _isLoggedIn = true;
+                          });
                         }
                       },
-                      child: Text("login"),
+                      child: Text("login in"),
                     ),
-
-                    FutureBuilder<Map<String, dynamic>>(
-                      future: _sendLoginRequest(),
-                      builder: (context, snapshot){
-                        if(snapshot.hasData){
-                          return Text(snapshot.data['access_token']);
-                        }else if(snapshot.hasError){
-                          return Text(snapshot.error.toString());
-                        }
-
-                        return CircularProgressIndicator();
-                      },
-                    )
-
+                    _isLoggedIn
+                        ? LoginAlert(_loginResponse)
+                        : Text("you have to logged in"),
+//                  _isLoggedIn ? Text("Welcome ") : Text("you have to logged in"),
                   ],
                 ),
               )
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class LoginAlert extends StatelessWidget {
+//  final _isLoggedIn;
+//  bool _isLoading = true;
+
+  Future<LoginResponse> _loginResponse;
+
+  LoginAlert(this._loginResponse);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: FutureBuilder<LoginResponse>(
+        future: _loginResponse,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          } else if (snapshot.hasData) {
+            return Text("Welcome");
+          }
+          return CircularProgressIndicator();
+        },
       ),
     );
   }
