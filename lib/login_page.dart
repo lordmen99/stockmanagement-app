@@ -9,24 +9,38 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
+
+
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _myController = TextEditingController();
 
-  Future<http.Response> _sendLoginRequest() async {
-    var url = "http://localhost:8000/api/auth/login";
 
+  Future<Map<String, dynamic>> _sendLoginRequest() async {
+    var url = "http://10.0.2.2:8000/api/auth/login";
+    debugPrint("hahah");
     var response = await http.post(url, headers: {
       HttpHeaders.contentTypeHeader: 'application/json',
-    }, body: {
+    }, body: jsonEncode({
       'email': 'postmanm@me.com',
       'password': '12345678'
-    });
-    return response;
+    }));
+
+    if(response.statusCode == 200){
+      final jsonResponse = jsonDecode(response.body);
+      return jsonResponse;
+    }
+
+    throw Exception("Failed to send post api");
+
+
   }
+
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Login page"),
@@ -86,18 +100,18 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text("login"),
                     ),
 
-                    FutureBuilder<http.Response>(
+                    FutureBuilder<Map<String, dynamic>>(
                       future: _sendLoginRequest(),
-                      builder: (BuildContext context, snapshot){
-                        if( snapshot.connectionState == ConnectionState.done){
-                          print(snapshot.data.body);
+                      builder: (context, snapshot){
+                        if(snapshot.hasData){
+                          return Text(snapshot.data['access_token']);
+                        }else if(snapshot.hasError){
+                          return Text(snapshot.error.toString());
                         }
+
                         return CircularProgressIndicator();
                       },
-                    ),
-
-
-
+                    )
 
                   ],
                 ),

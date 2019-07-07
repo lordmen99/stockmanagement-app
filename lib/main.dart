@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  new Scaffold(body:LoginPage())),
+                  MaterialPageRoute(builder: (context) =>  LoginPage()),
                 );
               },
               child: Text("Login"),
