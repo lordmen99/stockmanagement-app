@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import './services/auth_service.dart';
-import './pages/welcome_page.dart';
+import '../services/auth_service.dart';
+import './welcome_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
-import './models/json_response.dart';
+import '../models/json_response.dart';
 import 'package:async/async.dart';
 
 class LoginPage extends StatefulWidget {
@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _getUserTokenApi();
+//    _getUserTokenApi();
 
   }
   @override
@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text("Login here"),
+                    Text("Login here" ,style: TextStyle(color: Colors.purple,fontSize: 24),),
                     Form(
                       key: _formKey,
                       child: Column(
@@ -145,6 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           RaisedButton(
                             onPressed: () async {
+                              FocusScope.of(context).requestFocus(new FocusNode());
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();
                                 Map response =
@@ -162,10 +163,10 @@ class _LoginPageState extends State<LoginPage> {
                                 } else {
                                   _saveUserTokenApi(response);
 //                                  print(_saveUserTokenApi(response));
-                                  Navigator.popUntil(
-                                      context,
-                                      ModalRoute.withName(
-                                          Navigator.defaultRouteName));
+//                                  Navigator.popUntil(
+//                                      context,
+//                                      ModalRoute.withName(
+//                                          Navigator.defaultRouteName));
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
