@@ -34,6 +34,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+
+
   Future<Post>fetchData() async {
     String url = "https://jsonplaceholder.typicode.com/posts/1";
     var response = await http.get(url);
