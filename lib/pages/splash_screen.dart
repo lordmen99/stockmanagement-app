@@ -27,21 +27,21 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if(sharedPreferences.containsKey("user_api_token")){
       final token =  sharedPreferences.getString("user_api_token");
-      print(token);
+//      print(token);
       startTime((){
-        Navigator.popUntil(
-            context,
-            ModalRoute.withName(
-                Navigator.defaultRouteName));
+//        Navigator.popUntil(
+//            context,
+//            ModalRoute.withName(
+//                Navigator.defaultRouteName));
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => MyHomePage()));
+                builder: (context) => WelcomePage()));
       });
 
     }else{
       startTime((){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(title: "My Home Page",)));
       });
     }
 //    print(token);

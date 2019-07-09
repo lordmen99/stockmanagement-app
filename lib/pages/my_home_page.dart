@@ -67,6 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 if(snapshot.hasData){
                   return Text(snapshot.data.title);
                 }
+                else if(snapshot.hasError){
+                  return Text("${snapshot.error}");
+                }
                 return CircularProgressIndicator();
 
               },

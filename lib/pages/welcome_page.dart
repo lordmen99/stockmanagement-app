@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:stock_app/pages/login_page.dart';
 
-import 'my_home_page.dart';
+import './my_home_page.dart';
 
 class WelcomePage extends StatefulWidget {
 
@@ -81,7 +81,7 @@ class _WelcomePageState extends State<WelcomePage> {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => MyHomePage()));
+            builder: (context) => MyHomePage(title: "My home page",)));
 
     return;
   }
