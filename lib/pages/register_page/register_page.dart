@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
-import 'components/my_cutom_form.dart';
+import 'components/my_cutom_form_component.dart';
 
 class RegisterPage extends StatelessWidget {
   @override
@@ -28,7 +27,7 @@ class RegisterPage extends StatelessWidget {
               ],
             ),
           ),
-          child: MyCustomForm()),
+          child: MyCustomFormPage()),
     );
   }
 }

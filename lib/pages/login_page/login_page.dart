@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../services/auth_service.dart';
-import './welcome_page.dart';
+import '../../services/auth_service.dart';
+import '../welcome_page/welcome_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
-import '../models/json_response.dart';
+import '../../models/json_response.dart';
 import 'package:async/async.dart';
 
 class LoginPage extends StatefulWidget {

@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:stock_app/pages/welcome_page.dart';
+import 'package:stock_app/pages/welcome_page/welcome_page.dart';
 
-import 'package:stock_app/pages/login_page.dart';
+import 'package:stock_app/pages/login_page/login_page.dart';
 
-import 'my_home_page.dart';
+import 'package:stock_app/pages/home_page/my_home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stock_app/pages/register_page.dart';
+import 'package:stock_app/pages/register_page/register_page.dart';
 
-import './pages/splash_screen.dart';
+import 'package:stock_app/pages/splash_page/splash_screen.dart';
 
 void main() {
   runApp(MyApp());

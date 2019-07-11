@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import './login_page.dart';
+import 'package:stock_app/pages/login_page/login_page.dart';
 
 class MyHomePage extends StatefulWidget {
 
