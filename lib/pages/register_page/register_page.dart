@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
+
 import 'components/my_cutom_form_component.dart';
 
 class RegisterPage extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
+
 //    FlutterStatusbarcolor.setStatusBarColor(Colors.deepPurple);
     return Scaffold(
 //      resizeToAvoidBottomPadding: false,

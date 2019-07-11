@@ -1,12 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_app/pages/welcome_page/welcome_page.dart';
-
-import 'package:stock_app/pages/login_page/login_page.dart';
-
 import 'package:stock_app/pages/home_page/my_home_page.dart';
+import 'package:stock_app/services/db_services.dart';
+
+
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -14,50 +12,42 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-
-  startTime(Function callBack){
+  startTime(Function callBack) {
     return new Timer(Duration(seconds: 5), callBack);
   }
 
-  Future<void> _getUserTokenApi() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-//    sharedPreferences.clear();
-//    return ;
-
-    if(sharedPreferences.containsKey("user_api_token")){
-      final token =  sharedPreferences.getString("user_api_token");
-//      print(token);
-      startTime((){
+  Future<void> _checkLoggedIn() async {
+    bool isLoggedIn = await DbServices.userTokenApiIsAvailable();
+    if (isLoggedIn) {
+      startTime(() {
 //        Navigator.popUntil(
 //            context,
 //            ModalRoute.withName(
 //                Navigator.defaultRouteName));
         Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => WelcomePage()));
+      });
+    } else {
+      startTime(() {
+        Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => WelcomePage()));
-      });
-
-    }else{
-      startTime((){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(title: "My Home Page",)));
+                builder: (context) => MyHomePage(
+                      title: "My Home Page",
+                    )));
       });
     }
-//    print(token);
-//
-//
-
   }
-
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 //    startTime();
-    _getUserTokenApi();
+    _checkLoggedIn();
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

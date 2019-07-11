@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:stock_app/services/auth_service.dart';
 
 class MyCustomFormPage extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,6 +66,25 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class _MyCustomFormState extends State<MyCustomForm> {
+
+
+  Future<bool> _register() async{
+    final response = await AuthService.sendRegisterRequest(body: {
+      "nema" : "ali",
+      "email" : "ali@me.com",
+      "password" : "12345678"
+    });
+
+    if(response['message'] == "Successfully created user!"){
+      return true;
+    }
+
+    return false;
+
+  }
+
+
+
   final _formKey = GlobalKey<FormState>();
   bool _visible = false;
 
@@ -241,7 +263,10 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(5.0)),
                 color: Color(0xff5FD247),
-                onPressed: () {},
+                onPressed: () {
+                  FocusScope.of(context).requestFocus(new FocusNode());
+
+                },
                 child: Text(
                   "Sign up",
                   style: TextStyle(
