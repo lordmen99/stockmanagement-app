@@ -9,6 +9,7 @@ class SmallButton extends StatelessWidget {
     return Container(
       width: 55,
       height: 48,
+      margin: EdgeInsets.symmetric(horizontal: 18),
       child: RaisedButton(
           onPressed: () {},
           elevation: 0,

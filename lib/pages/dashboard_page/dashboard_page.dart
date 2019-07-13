@@ -53,17 +53,21 @@ class DashboardPage extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 125),
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   SmallButton(
                     iconData: FontAwesomeIcons.list,
                   ),
+//                  Spacer(flex: 10),
                   LargeButton(
                     buttonText: "Add new order",
                   ),
+//                  Spacer(flex: 10),
                   SmallButton(
                     iconData: FontAwesomeIcons.user,
                   ),
+
                 ],
               ),
             ),
