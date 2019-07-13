@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:stock_app/pages/dashboard_page/dashboard_page.dart';
 import 'package:stock_app/services/auth_service.dart';
 
 class MyCustomFormPage extends StatelessWidget {
@@ -265,7 +266,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 color: Color(0xff5FD247),
                 onPressed: () {
                   FocusScope.of(context).requestFocus(new FocusNode());
-
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardPage()));
                 },
                 child: Text(
                   "Sign up",
