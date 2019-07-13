@@ -162,7 +162,7 @@ class _LoginFormState extends State<LoginForm> {
                         }
                       },
                       child: Text(
-                        "login in",
+                        "Sign in",
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: "Rubik-Regular",

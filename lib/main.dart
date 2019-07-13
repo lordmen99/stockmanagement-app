@@ -4,12 +4,13 @@ import 'package:stock_app/pages/register_page/register_page.dart';
 
 import 'package:stock_app/pages/splash_page/splash_screen.dart';
 
+
 void main() {
   runApp(MyApp());
 //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
 //
 //  ));
-  SystemChrome.setEnabledSystemUIOverlays([]);
+//  SystemChrome.setEnabledSystemUIOverlays([]);
 
 }
 
