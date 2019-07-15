@@ -4,6 +4,8 @@ import 'package:stock_app/pages/register_page/register_page.dart';
 
 import 'package:stock_app/pages/splash_page/splash_screen.dart';
 
+import 'data_page.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Rubik",
         primarySwatch: Colors.purple,
       ),
-      home: SplashScreen(),//RegisterPage(),//MyHomePage(title: 'Stock Management App'),
+      home: Data()//SplashScreen(),//RegisterPage(),//MyHomePage(title: 'Stock Management App'),
     );
   }
 }
