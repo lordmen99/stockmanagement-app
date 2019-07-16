@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stock_app/pages/register_page/register_page.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:stock_app/pages/splash_page/splash_screen.dart';
 import 'package:stock_app/tab_page.dart';
 
+import 'camer_page.dart';
 import 'data_page.dart';
 
 
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Rubik",
         primarySwatch: Colors.purple,
       ),
-      home: TabPage()//SplashScreen(),//RegisterPage(),//MyHomePage(title: 'Stock Management App'),
+      home: CameraPage()//SplashScreen(),//RegisterPage(),//MyHomePage(title: 'Stock Management App'),
     );
   }
 }

@@ -17,6 +17,8 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  path_provider: ^1.1.2
+  image_picker: ^0.6.0+16
   bubble_tab_indicator: "^0.1.4"
   connectivity: ^0.4.3+4
   font_awesome_flutter: ^8.0.1
