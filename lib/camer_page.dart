@@ -20,35 +20,31 @@ class _CameraPageState extends State<CameraPage> {
   Future<void> _getImageFromGallery() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
-    final String path = (await getApplicationDocumentsDirectory()).path;
+    // final String path = (await getApplicationDocumentsDirectory()).path;
     // var file = File('$path/my_image.png');
     // return file;
 
 
-    final File newImage = await image.copy('$path/avatar_image.png');
+    // final File newImage = await image.copy('$path/avatar_image.png');
     
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('avatar_image', newImage.path);
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.setString('avatar_image', newImage.path);
     setState(() {
-      _imageFile = newImage;
+      _imageFile = image;
     });
   
-
     Navigator.pop(_scaffoldKey.currentContext);
-setState(() {
-  
-});
     // _saveUserImage(_imageFile);
   }
 
-  // Future<void> _getImageFromCamera() async {
-  //   var image = await ImagePicker.pickImage(source: ImageSource.camera);
-  //   setState(() {
-  //     _imageFile = image;
-  //   });
-  //   Navigator.pop(_scaffoldKey.currentContext);
-  //   _saveUserImage(_imageFile);
-  // }
+  Future<void> _getImageFromCamera() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      _imageFile = image;
+    });
+    Navigator.pop(_scaffoldKey.currentContext);
+    // _saveUserImage(_imageFile);
+  }
 
   // Future<bool> _saveUserImage(File imageFile)async{
   //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -57,34 +53,34 @@ setState(() {
   //   return result;
   // }
 
-  Future<String> _getUserImage() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    if(sharedPreferences.containsKey("avatar_image")){
-      print("yes we have image storaged");
-      String imagePath = sharedPreferences.getString("avatar_image");
-      _imageFile = (File(imagePath));
-      var ss= FileImage(_imageFile);
-      ss.toString();
-      final String path = (await getApplicationDocumentsDirectory()).path;
-      final File newImage = await _imageFile.copy('$path/avatar_image.png');
+  // Future<String> _getUserImage() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   if(sharedPreferences.containsKey("avatar_image")){
+  //     print("yes we have image storaged");
+  //     String imagePath = sharedPreferences.getString("avatar_image");
+  //     _imageFile = (File(imagePath));
+  //     var ss= FileImage(_imageFile);
+  //     ss.toString();
+  //     final String path = (await getApplicationDocumentsDirectory()).path;
+  //     final File newImage = await _imageFile.copy('$path/avatar_image.png');
       
-      setState(() {
-        _imageFile=newImage;
-      });
-      print(newImage);
-      print(ss.toString());
-      return imagePath;
-      // setState(() {
-      //   print("image path is : $imagePath");
-      //   _imageFile = File(imagePath);
-      //   print("image file is : $_imageFile");
-      // });
-    }
-    throw Exception("no image stored");
-  }
+  //     setState(() {
+  //       _imageFile=newImage;
+  //     });
+  //     print(newImage);
+  //     print(ss.toString());
+  //     return imagePath;
+  //     // setState(() {
+  //     //   print("image path is : $imagePath");
+  //     //   _imageFile = File(imagePath);
+  //     //   print("image file is : $_imageFile");
+  //     // });
+  //   }
+  //   throw Exception("no image stored");
+  // }
   @override
   void initState() {
-    _getUserImage();
+    // _getUserImage();
     
     super.initState();
   }
@@ -144,10 +140,10 @@ File _imageFile;
             _imageFile == null ? Text("no image") :
              Image.file(_imageFile),
             // FileImage(File(prefs.getString('avatar_image')),
-          RaisedButton(
-            child: Text("load"),
-            onPressed: _getUserImage,
-          ),
+          // RaisedButton(
+          //   child: Text("load"),
+          //   onPressed: _getUserImage,
+          // ),
           
           ],
         ),

@@ -1,4 +1,5 @@
-//import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //
 //
@@ -49,3 +50,7 @@
 ////_visible = !_visible;
 ////});
 ////}),
+///
+final mainColor = Color(0xff4B2D83);
+final lightTextColor = Color(0xff9785B7);
+final buttonColor = Color(0xff5FD247);
