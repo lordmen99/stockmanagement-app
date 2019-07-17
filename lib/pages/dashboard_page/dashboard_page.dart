@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:stock_app/pages/orders_list_page/orders_list_page.dart';
+import 'package:stock_app/pages/profile_page/profile_page.dart';
 
 import 'components/button_component.dart';
 
@@ -58,14 +60,23 @@ class DashboardPage extends StatelessWidget {
                 children: <Widget>[
                   SmallButton(
                     iconData: FontAwesomeIcons.list,
+                    callBack: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> OrdersListPage()));
+                    },
                   ),
 //                  Spacer(flex: 10),
                   LargeButton(
                     buttonText: "Add new order",
+                    callBack: (){
+                      print("Add new order");
+                    },
                   ),
 //                  Spacer(flex: 10),
                   SmallButton(
                     iconData: FontAwesomeIcons.user,
+                    callBack: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+                    },
                   ),
 
                 ],

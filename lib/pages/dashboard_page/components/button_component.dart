@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class SmallButton extends StatelessWidget {
   final IconData iconData;
-  SmallButton({this.iconData});
+  final Function callBack;
+  SmallButton({this.iconData, this.callBack});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class SmallButton extends StatelessWidget {
       height: 48,
       margin: EdgeInsets.symmetric(horizontal: 18),
       child: RaisedButton(
-          onPressed: () {},
+          onPressed: callBack,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(5),
@@ -28,15 +29,16 @@ class SmallButton extends StatelessWidget {
 class LargeButton extends StatelessWidget {
   final _buttonColor = Color(0xff5FD247);
   final String buttonText;
+  final Function callBack;
 
-  LargeButton({this.buttonText});
+  LargeButton({this.buttonText, this.callBack});
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 162,
       height: 48,
       child: RaisedButton(
-        onPressed: () {},
+        onPressed: callBack,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(5),

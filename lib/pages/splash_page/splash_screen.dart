@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:stock_app/pages/welcome_page/welcome_page.dart';
 import 'package:stock_app/pages/home_page/my_home_page.dart';
 import 'package:stock_app/services/db_services.dart';
@@ -73,9 +74,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-//    startTime();
+  //  startTime((){});x
     _checkLoggedIn();
   }
 
@@ -90,17 +90,44 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              child: Icon(
-                Icons.assignment,
-                size: 40,
-                color: Colors.white,
+              child: Column(
+            children: <Widget>[
+              Container(
+                  margin: EdgeInsets.only(top: 55),
+                  child: SvgPicture.asset(
+                    "assets/logo.svg",
+                    width: 210,
+                    height: 96,
+                  )),
+              Container(
+                margin: EdgeInsets.only(top: 15),
+                child: Text(
+                  "FASTBOX",
+                  style: TextStyle(
+                      fontFamily: "Rubik-Regular",
+                      fontSize: 40,
+                      color: Colors.white),
+                ),
               ),
+              Container(
+                alignment: Alignment.centerRight,
+                margin: EdgeInsets.only(right: 85),
+                child: Text(
+                  "Lorem ipsum",
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xff9785B7),
+                      fontFamily: "Rubik-Light"),
+                ),
+              ),
+            ],
+          ),
               margin: EdgeInsets.only(bottom: 20),
             ),
-            Text(
-              "Stock Management App",
-              style: TextStyle(color: Colors.white, fontSize: 24),
-            ),
+            // Text(
+            //   "Stock Management App",
+            //   style: TextStyle(color: Colors.white, fontSize: 24),
+            // ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 40),
               child: CircularProgressIndicator(),

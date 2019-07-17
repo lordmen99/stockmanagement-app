@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Rubik",
         primarySwatch: Colors.purple,
       ),
-      home: ProfilePage()//CameraPage()//SplashScreen(),//RegisterPage(),//MyHomePage(title: 'Stock Management App'),
+      home: SplashScreen(),//RegisterPage(),//MyHomePage(title: 'Stock Management App'),
     );
   }
 }
