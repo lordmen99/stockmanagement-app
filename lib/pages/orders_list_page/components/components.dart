@@ -5,8 +5,9 @@ class CardItem extends StatelessWidget {
   // final String status;
   final String productTitle;
   final int count;
-  final Status status;
-  CardItem({this.count, this.status, this.productTitle});
+  final String status;
+  final String imageUrl;
+  CardItem({this.count, this.status, this.productTitle, this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +15,11 @@ class CardItem extends StatelessWidget {
     Color _statusColor;
     String _statusText;
 
-    if(this.status == Status.Canceled){
+    if(this.status == "OrderItemStatus.CANCELED"){
       _statusColor = Colors.pinkAccent;
       _textColor = Colors.white;
       _statusText = "Canceld";
-    }else if(this.status == Status.Approved){
+    }else if(this.status == "OrderItemStatus.APPROVED"){
       _statusColor = Colors.greenAccent;
       _textColor = mainColor;
       _statusText = "Approved";
@@ -44,7 +45,10 @@ class CardItem extends StatelessWidget {
               Container(
                 width: 50,
                 height: 50,
-                child: Image.asset("assets/avatar.png"),
+                // child: Image.asset("assets/avatar.png"),
+                // child: Image.network("http://localhost:8000/images/1561961247.41WglAapeDL.jpg"),
+                  child: imageUrl == null ? Text("dfdf") : Image.network(imageUrl),
+
                 color: Colors.orange,
               ), // image
               Column(
@@ -71,9 +75,30 @@ class CardItem extends StatelessWidget {
   }
 }
 
+// enum OrderItemStatus { CANCELED, APPROVED, CHECKING_BY_STOCK }
 
-enum Status{
-  Approved,
-  Canceled,
-  Checking
-} 
+// enum Status{
+//   Approved,
+//   Canceled,
+//   Checking
+// } 
+
+// final statusValues = new EnumValues({
+//     "Approved": Status.Approved,
+//     "Canceled": Status.Canceled,
+//     "Checking By Stock": Status.Checking
+// });
+
+// class EnumValues<T> {
+//     Map<String, T> map;
+//     Map<T, String> reverseMap;
+
+//     EnumValues(this.map);
+
+//     Map<T, String> get reverse {
+//         if (reverseMap == null) {
+//             reverseMap = map.map((k, v) => new MapEntry(v, k));
+//         }
+//         return reverseMap;
+//     }
+// }

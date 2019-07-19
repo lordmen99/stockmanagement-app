@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:stock_app/pages/dashboard_page/dashboard_page.dart';
 import 'package:stock_app/pages/welcome_page/welcome_page.dart';
 import 'package:stock_app/pages/home_page/my_home_page.dart';
 import 'package:stock_app/services/db_services.dart';
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isLoggedIn) {
       startTime(() {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => WelcomePage()));
+            context, MaterialPageRoute(builder: (context) => DashboardPage()));
       });
     } else {
       startTime(() {

@@ -11,12 +11,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-//    _getUserTokenApi();
-  }
+  
 
   @override
   Widget build(BuildContext context) {
