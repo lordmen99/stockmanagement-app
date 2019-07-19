@@ -3,10 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stock_app/pages/dashboard_page/dashboard_page.dart';
 import 'package:stock_app/services/auth_service.dart';
+import 'package:stock_app/services/db_services.dart';
 
 class MyCustomFormPage extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -67,27 +66,37 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class _MyCustomFormState extends State<MyCustomForm> {
-
-
-  Future<bool> _register() async{
+  Future<bool> _register(BuildContext context) async {
     final response = await AuthService.sendRegisterRequest(body: {
-      "nema" : "ali",
-      "email" : "ali@me.com",
-      "password" : "12345678"
+      "email": _emailFieldController.text,
+      "name": _namelFieldController.text,
+      "password": _passwordFieldController.text,
+      "role": "Simple User"
     });
 
-    if(response['message'] == "Successfully created user!"){
+    if (response['status'] == "successful") {
+      DbServices.saveUserTokenApi(response['responde']);
+
+      print(response['responde']);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => DashboardPage()),
+          (Route<dynamic> route) => false);
       return true;
     }
-
-    return false;
-
+    // print(response);
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text("some thing sent wrong!"),
+    ));
+    throw Exception("some thing sent wrong");
   }
-
-
 
   final _formKey = GlobalKey<FormState>();
   bool _visible = false;
+  final _namelFieldController = TextEditingController();
+  final _emailFieldController = TextEditingController();
+  final _passwordFieldController = TextEditingController();
+  final _passwordFieldController2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -96,11 +105,12 @@ class _MyCustomFormState extends State<MyCustomForm> {
       child: Column(
         children: <Widget>[
           TextFormField(
+            controller: _namelFieldController,
             focusNode: FocusNode(),
             style: TextStyle(color: Colors.white),
             validator: (value) {
               if (value.isEmpty) {
-                return 'Enter some text';
+                return 'name Required';
               }
               return null;
             },
@@ -135,10 +145,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
           ),
           TextFormField(
+            controller: _emailFieldController,
             keyboardType: TextInputType.emailAddress,
             validator: (value) {
               if (value.isEmpty) {
-                return 'Enter some text';
+                return 'email Required';
               }
               return null;
             },
@@ -173,12 +184,15 @@ class _MyCustomFormState extends State<MyCustomForm> {
             style: TextStyle(color: Colors.white),
           ),
           TextFormField(
+            controller: _passwordFieldController,
             style: TextStyle(color: Colors.white),
             obscureText: _visible ? false : true,
             keyboardType: TextInputType.text,
             validator: (value) {
               if (value.isEmpty) {
-                return 'Enter some text';
+                return 'Password Required';
+              } else if (value.length < 8) {
+                return "The Password Requires 8 Characters Or More";
               }
               return null;
             },
@@ -214,12 +228,17 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
           ),
           TextFormField(
+            controller: _passwordFieldController2,
             style: TextStyle(color: Colors.white),
             obscureText: _visible ? false : true,
             keyboardType: TextInputType.text,
             validator: (value) {
               if (value.isEmpty) {
-                return 'Enter some text';
+                return 'Enter password';
+              } else if (value.length < 8) {
+                return "The Password Requires 8 Characters Or More";
+              } else if (value != _passwordFieldController.text) {
+                return 'Passwrod is not matching';
               }
               return null;
             },
@@ -266,7 +285,12 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 color: Color(0xff5FD247),
                 onPressed: () {
                   FocusScope.of(context).requestFocus(new FocusNode());
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardPage()));
+                  if (_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                    _register(context);
+                  }
+
+                  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardPage()));
                 },
                 child: Text(
                   "Sign up",

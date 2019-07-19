@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix0;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:stock_app/services/check_internet_connection_service.dart';
 import 'package:stock_app/services/db_services.dart';
 import '../../../services/auth_service.dart';
 import '../../welcome_page/welcome_page.dart';
@@ -16,25 +18,25 @@ class _LoginFormState extends State<LoginForm> {
   bool _visible = false;
 
   Future<void> _loggIn(BuildContext context) async {
-    Map response = await AuthService.sendLoginRequest(body: {
-      "email": _emailFieldController.text,
-      "password": _passwordFieldController.text
-    });
+    // checking network connection and showing snack bar if not connected
+    if (await checkNetworkConnection(context)) {
+      Map response = await AuthService.sendLoginRequest(body: {
+        "email": _emailFieldController.text,
+        "password": _passwordFieldController.text
+      });
 
-    if (response['message'] == "Unauthorized") {
-      var snackBar = SnackBar(
-        content: Text("password or email is not correct"),
-      );
-      Scaffold.of(context).showSnackBar(snackBar);
-    } else {
-      DbServices.saveUserTokenApi(response);
-//                                  print(_saveUserTokenApi(response));
-//                                  Navigator.popUntil(
-//                                      context,
-//                                      ModalRoute.withName(
-//                                          Navigator.defaultRouteName));
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => WelcomePage()));
+      if (response['error'] == "Unauthorized") {
+        var snackBar = SnackBar(
+          content: Text("password or email is not correct"),
+        );
+        Scaffold.of(context).showSnackBar(snackBar);
+      } else {
+        DbServices.saveUserTokenApi(response);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => WelcomePage()),
+            (Route<dynamic> route) => false);
+      }
     }
   }
 
@@ -142,8 +144,6 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                   ),
                 ),
-
-
                 Container(
                   margin: EdgeInsets.only(top: 47),
                   child: SizedBox(
@@ -171,9 +171,6 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                   ),
                 ),
-
-
-
               ],
             ),
           )
