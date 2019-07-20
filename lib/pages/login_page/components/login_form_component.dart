@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:stock_app/pages/dashboard_page/dashboard_page.dart';
 import 'package:stock_app/services/check_internet_connection_service.dart';
 import 'package:stock_app/services/db_services.dart';
 import '../../../services/auth_service.dart';
-import '../../welcome_page/welcome_page.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -16,6 +16,8 @@ class _LoginFormState extends State<LoginForm> {
   final _emailFieldController = TextEditingController();
   final _passwordFieldController = TextEditingController();
   bool _visible = false;
+
+  String token;
 
   Future<void> _loggIn(BuildContext context) async {
 
@@ -34,9 +36,10 @@ class _LoginFormState extends State<LoginForm> {
         Scaffold.of(context).showSnackBar(snackBar);
       } else {
         DbServices.saveUserTokenApi(response);
+        this.token = response['access_token'];
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => WelcomePage()),
+            MaterialPageRoute(builder: (context) => DashboardPage(token:this.token ,)),
             (Route<dynamic> route) => false);
       }
     }

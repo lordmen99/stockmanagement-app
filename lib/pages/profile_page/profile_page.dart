@@ -1,11 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stock_app/pages/home_page/my_home_page.dart';
 import '../../services/camera_services.dart';
 import '../../theme/style.dart';
-
-
-
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -17,21 +16,35 @@ class _ProfilePageState extends State<ProfilePage> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  Future<void> _selectPhotoFromGallary () async {
-    var image = await getImageFromGallery();    
+  Future<void> _selectPhotoFromGallary() async {
+    var image = await getImageFromGallery();
     setState(() {
       _imageFiel = image;
     });
     Navigator.pop(context);
+  }
 
-  }
-  Future<void> _selectPhotoFromCamera () async {
-    var image = await getImageFromCamera();    
+  Future<void> _selectPhotoFromCamera() async {
+    var image = await getImageFromCamera();
     setState(() {
       _imageFiel = image;
     });
     Navigator.pop(context);
   }
+
+  Future<void> _userLogot() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.clear();
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MyHomePage(
+                  title: "My home page",
+                )));
+
+    return;
+  }
+
   void _showDialog() {
     showDialog(
         context: context,
@@ -55,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Text("Camera"),
                     onTap: () {
                       print("camera");
-                       _selectPhotoFromCamera();
+                      _selectPhotoFromCamera();
                     },
                   ),
                 ],
@@ -84,7 +97,9 @@ class _ProfilePageState extends State<ProfilePage> {
             CircleAvatar(
               maxRadius: 56,
               backgroundColor: buttonColor,
-              backgroundImage: _imageFiel == null ? AssetImage("assets/avatar.png"): FileImage(_imageFiel),
+              backgroundImage: _imageFiel == null
+                  ? AssetImage("assets/avatar.png")
+                  : FileImage(_imageFiel),
               // child: _imageFiel == null ? Image.asset("assets/avatar.png"): Image.file(_imageFiel),
             ),
             SizedBox(
@@ -94,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
               width: 162,
               height: 48,
               child: RaisedButton(
-                onPressed: (){
+                onPressed: () {
                   _showDialog();
                 },
                 elevation: 0,
@@ -104,6 +119,26 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: buttonColor,
                 child: Text(
                   "select photo",
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              ),
+            ),
+            Container(
+              width: 162,
+              height: 48,
+              margin: EdgeInsets.only(top: 20),
+              child: RaisedButton(
+                onPressed: () {
+                  print("log out");
+                  _userLogot();
+                },
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(5),
+                ),
+                color: Colors.blueGrey,
+                child: Text(
+                  "log out",
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),

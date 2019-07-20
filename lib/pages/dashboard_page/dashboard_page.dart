@@ -2,17 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stock_app/pages/order_items_page/orders_list_items_page.dart';
+import 'package:stock_app/pages/orders_page/orders_page.dart';
 import 'package:stock_app/pages/profile_page/profile_page.dart';
 
 import 'components/button_component.dart';
 
 class DashboardPage extends StatelessWidget {
-  final _mainColor = Color(0xff4B2D83);
-  final _lightTextColor = Color(0xff9785B7);
-  final _buttonColor = Color(0xff5FD247);
+
+  final String token;
+  DashboardPage({this.token});
+
 
   @override
   Widget build(BuildContext context) {
+    final _mainColor = Color(0xff4B2D83);
+    final _lightTextColor = Color(0xff9785B7);
+    final _buttonColor = Color(0xff5FD247);
+
+
     return Scaffold(
       backgroundColor: _mainColor,
       body: Center(
@@ -61,7 +68,7 @@ class DashboardPage extends StatelessWidget {
                   SmallButton(
                     iconData: FontAwesomeIcons.list,
                     callBack: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> OrderItemsPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> OrdersPage(token: this.token,)));
                     },
                   ),
 //                  Spacer(flex: 10),
@@ -82,6 +89,7 @@ class DashboardPage extends StatelessWidget {
                 ],
               ),
             ),
+            Container(),
           ],
         ),
       ),

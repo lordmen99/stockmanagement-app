@@ -25,35 +25,17 @@ class DbServices {
   }
 
 
-//  static Future<void> _getUserTokenApi() async {
-//    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-////    sharedPreferences.clear();
-////    return ;
-//
-//    if(sharedPreferences.containsKey("user_api_token")){
-//      final token =  sharedPreferences.getString("user_api_token");
-////      print(token);
-//      startTime((){
-////        Navigator.popUntil(
-////            context,
-////            ModalRoute.withName(
-////                Navigator.defaultRouteName));
-//        Navigator.pushReplacement(
-//            context,
-//            MaterialPageRoute(
-//                builder: (context) => WelcomePage()));
-//      });
-//
-//    }else{
-//      startTime((){
-//        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(title: "My Home Page",)));
-//      });
-//    }
-////    print(token);
-////
-////
-//
-//  }
+  static Future<String> getUserTokenApi() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    if(sharedPreferences.containsKey("user_api_token")){
+      final token =  sharedPreferences.getString("user_api_token");
+      return token;
+
+    }else{
+      throw Exception("api token not found!");
+    }
+  }
 
 }
 

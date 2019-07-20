@@ -13,6 +13,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
+  String token;
 
   startTime(Function callBack) {
     return new Timer(Duration(seconds: 5), callBack);
@@ -21,9 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _checkLoggedIn() async {
     bool isLoggedIn = await DbServices.userTokenApiIsAvailable();
     if (isLoggedIn) {
+      this.token = await DbServices.getUserTokenApi();
       startTime(() {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => DashboardPage()));
+            context, MaterialPageRoute(builder: (context) => DashboardPage(token: this.token,)));
       });
     } else {
       startTime(() {

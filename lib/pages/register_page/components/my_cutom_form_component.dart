@@ -66,6 +66,7 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class _MyCustomFormState extends State<MyCustomForm> {
+  String token;
   Future<bool> _register(BuildContext context) async {
     final response = await AuthService.sendRegisterRequest(body: {
       "email": _emailFieldController.text,
@@ -76,11 +77,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
 
     if (response['status'] == "successful") {
       DbServices.saveUserTokenApi(response['responde']);
-
+      this.token = response['responde']['access_token'];
       print(response['responde']);
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => DashboardPage()),
+          MaterialPageRoute(builder: (context) => DashboardPage(token: this.token,)),
           (Route<dynamic> route) => false);
       return true;
     }
