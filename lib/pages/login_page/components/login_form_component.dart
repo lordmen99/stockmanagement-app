@@ -18,6 +18,8 @@ class _LoginFormState extends State<LoginForm> {
   bool _visible = false;
 
   Future<void> _loggIn(BuildContext context) async {
+
+    Scaffold.of(context).hideCurrentSnackBar();
     // checking network connection and showing snack bar if not connected
     if (await checkNetworkConnection(context)) {
       Map response = await AuthService.sendLoginRequest(body: {

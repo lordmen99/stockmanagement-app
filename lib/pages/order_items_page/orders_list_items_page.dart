@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:stock_app/pages/orders_list_page/components/components.dart';
+//import 'package:stock_app/pages/orders_list_page/components/components.dart';
+import './components/components.dart';
 import 'package:stock_app/services/api_services.dart';
-import '../../models/orders_list.dart';
+import '../../models/orders_list_items.dart';
 import '../../theme/style.dart';
 
-class OrdersListPage extends StatefulWidget {
+class OrderItemsPage extends StatefulWidget {
   @override
-  _OrdersListPageState createState() => _OrdersListPageState();
+  _OrderItemsPageState createState() => _OrderItemsPageState();
 }
 
-class _OrdersListPageState extends State<OrdersListPage> {
+class _OrderItemsPageState extends State<OrderItemsPage> {
   // final OrdersList ordersList;
 
   // Future _getOrdersListModel() async{
@@ -22,8 +23,8 @@ class _OrdersListPageState extends State<OrdersListPage> {
     super.initState();
   }
 
-  final token =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU2MzUyMTcyNSwibmJmIjoxNTYzNTIxNzI1LCJqdGkiOiJoSUZLMERadTc4NnI1TVVJIiwic3ViIjo4LCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.M7LRTKii-z3UUb4joht-lT35TruJUz3I3PP4fws4UKU";
+  final token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU2MzQzNzk3NCwibmJmIjoxNTYzNDM3OTc0LCJqdGkiOiJMS0lYWDVIbndGRVlGUFdkIiwic3ViIjo4LCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.y87GX8R1k4dWvuJpNo_HpyqqJA8ttD7NXGWcH14AZjg";
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class _OrdersListPageState extends State<OrdersListPage> {
             Container(
               margin: EdgeInsets.only(top: 65, bottom: 20),
               child: Text(
-                "List of orders",
+                "List of Orders list items",
                 style: TextStyle(color: Colors.white, fontSize: 23),
               ),
             ),
@@ -62,8 +63,8 @@ class _OrdersListPageState extends State<OrdersListPage> {
                           status: ordersItems[index].status.toString(),
                           productTitle: ordersItems[index].product.name,
                           // imageUrl: ordersItems[index].product.images == null ? "null" : ordersItems[index].product.images.first.url,
-                          imageUrl: "http://localhost:8000/images/1561961247.41WglAapeDL.jpg",
-                          count: 45,
+                          imageUrl: "http://10.0.3.2:8000/images/1561188950.41WglAapeDL.jpg",
+                          count: ordersItems[index].qty,
                         );
                         return Text(ordersItems[index].qty.toString());
                       },
