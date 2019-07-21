@@ -29,3 +29,17 @@ Future<OrdersList> getOrdersList({String token}) async {
   }
     throw Exception("faild to load api");
 }
+
+
+Future<String> getUserImage(String token) async{
+  final url = "http://10.0.3.2:8000/api/profile";
+  final response = await http.get(url,headers: {'Content-Type' : 'application/json', 'Accept' : 'application/json' , 'Authorization' : 'bearer $token'});
+//  final jsonResposen = json.decode(response.body);
+  if(response.statusCode == 200){
+    print("ok");
+    print(response.body.toString());
+    return response.body;
+  }else{
+    throw Exception("fial to get image form api");
+  }
+}

@@ -76,7 +76,7 @@ class _OrdersPageState extends State<OrdersPage> {
                         RefreshBackground(),
                         SliverList(
                             delegate: SliverChildListDelegate(
-                                List.generate(2, (index) {
+                                List.generate(ordersList.orders.length, (index) {
                           return ListTile(
                             title: Text(
                               "Order : " + index.toString(),

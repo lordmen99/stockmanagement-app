@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  cached_network_image: ^1.1.0
   pull_to_refresh: ^1.4.5
   path_provider: ^1.1.2
   image_picker: ^0.6.0+16

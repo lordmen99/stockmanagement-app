@@ -86,7 +86,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   SmallButton(
                     iconData: FontAwesomeIcons.user,
                     callBack: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage(token: this.widget.token,)));
                     },
                   ),
 
