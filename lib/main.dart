@@ -5,6 +5,7 @@ import 'package:stock_app/pages/register_page/register_page.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:stock_app/pages/splash_page/splash_screen.dart';
+import 'package:stock_app/pull_to_refresh.dart';
 import 'package:stock_app/tab_page.dart';
 
 import 'camer_page.dart';

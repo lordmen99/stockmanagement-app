@@ -7,12 +7,16 @@ import 'package:stock_app/pages/profile_page/profile_page.dart';
 
 import 'components/button_component.dart';
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends StatefulWidget {
 
   final String token;
   DashboardPage({this.token});
 
+  @override
+  _DashboardPageState createState() => _DashboardPageState();
+}
 
+class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     final _mainColor = Color(0xff4B2D83);
@@ -68,7 +72,7 @@ class DashboardPage extends StatelessWidget {
                   SmallButton(
                     iconData: FontAwesomeIcons.list,
                     callBack: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> OrdersPage(token: this.token,)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> OrdersPage(token: this.widget.token,)));
                     },
                   ),
 //                  Spacer(flex: 10),
