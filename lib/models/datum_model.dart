@@ -1,18 +1,18 @@
 
 import 'dart:convert';
 
-Datum datumFromJson(String str) => Datum.fromJson(json.decode(str));
+Categories categoriesFromJson(String str) => Categories.fromJson(json.decode(str));
 
-String datumToJson(Datum data) => json.encode(data.toJson());
+String datumToJson(Categories data) => json.encode(data.toJson());
 
-class Datum {
+class Categories {
   List<Category> categories;
 
-  Datum({
+  Categories({
     this.categories,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => new Datum(
+  factory Categories.fromJson(Map<String, dynamic> json) => new Categories(
     categories: new List<Category>.from(json["data"].map((x) => Category.fromJson(x))),
   );
 

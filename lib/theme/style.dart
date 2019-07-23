@@ -53,4 +53,5 @@ import 'package:flutter/material.dart';
 ///
 final mainColor = Color(0xff4B2D83);
 final lightTextColor = Color(0xff9785B7);
+final textColor = Color(0xff3F266E);
 final buttonColor = Color(0xff5FD247);

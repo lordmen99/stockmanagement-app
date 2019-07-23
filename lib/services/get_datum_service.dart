@@ -3,15 +3,18 @@ import '../models/datum_model.dart';
 import 'package:http/http.dart' as http;
 
 
-Future<Datum> getDatum() async{
-  final url = "http://10.0.2.2:8000/api/categories";
+Future<Categories> getCategories({String token}) async{
+  final url = "http://10.0.3.2:8000/api/categories";
+
   var response = await http.get(url,headers: {
     'Content-Type' : 'application/json',
-    'Accept' : 'application/json'
+    'Accept' : 'application/json',
+    'Authorization' : 'bearer $token'
   });
+
   if(response.statusCode == 200){
-    Datum datum = datumFromJson(response.body);
-    return datum;
+    Categories categories = categoriesFromJson(response.body);
+    return categories;
   }
 
   throw Exception("fiald to get data from api");

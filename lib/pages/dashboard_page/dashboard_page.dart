@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:stock_app/pages/new_order_page/new_order_page.dart';
 import 'package:stock_app/pages/order_items_page/orders_list_items_page.dart';
 import 'package:stock_app/pages/orders_page/orders_page.dart';
 import 'package:stock_app/pages/profile_page/profile_page.dart';
@@ -79,7 +80,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   LargeButton(
                     buttonText: "Add new order",
                     callBack: (){
-                      print("Add new order");
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateOrderPage(token: this.widget.token,)));
                     },
                   ),
 //                  Spacer(flex: 10),
