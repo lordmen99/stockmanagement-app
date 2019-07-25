@@ -45,6 +45,7 @@ class CreateOrderPage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => ProductPage(
+                                            token: this.token,
                                                 category: categories
                                                     .categories[index],
                                               )));

@@ -143,6 +143,15 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              child: Text("Name : Sajad Sohrabi" ,style: TextStyle(color: Colors.white, fontSize: 20),),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              child: Text("Email : Sajad Sohrabi@gmail.com" ,style: TextStyle(color: Colors.white, fontSize: 19),),
+            ),
+
             FutureBuilder<String>(
               future: getUserImage(widget.token),
               builder: (context, snapshot) {
