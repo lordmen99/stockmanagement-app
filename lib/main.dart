@@ -10,6 +10,7 @@ import 'package:stock_app/tab_page.dart';
 
 import 'camer_page.dart';
 import 'data_page.dart';
+import 'db_test.dart';
 
 
 void main() {
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
         fontFamily: "Rubik",
         primarySwatch: Colors.purple,
       ),
-      home: SplashScreen(),//RegisterPage(),//MyHomePage(title: 'Stock Management App'),
+home: Home(),
+//      home: SplashScreen(),//RegisterPage(),//MyHomePage(title: 'Stock Management App'),
     );
   }
 }
