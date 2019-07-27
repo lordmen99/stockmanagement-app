@@ -54,7 +54,8 @@ class Order {
         "id": id,
         "user_id": userId,
         "status": OrderStatusValues.reverse[status],
-        "order_items": new List<dynamic>.from(orderItems.map((x) => x.toJson())),
+//        "order_items": new List<dynamic>.from(orderItems.map((x) => x.toJson())),
+//        "order_items" : 1,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
     };
