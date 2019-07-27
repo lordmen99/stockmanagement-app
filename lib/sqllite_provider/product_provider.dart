@@ -8,3 +8,5 @@ class ProductProvider extends Provider{
     return await db.insert(_tableName, Map.from({"title" : "this is a product titlte"}));
   }
 }
+
+
