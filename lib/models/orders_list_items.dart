@@ -45,7 +45,8 @@ class Order {
         id: json["id"],
         userId: json["user_id"],
         status: OrderStatusValues.map[json["status"]],
-        orderItems: new List<OrderItem>.from(json["order_items"].map((x) => OrderItem.fromJson(x))),
+//        orderItems: new List<OrderItem>.from(json["order_items"].map((x) => OrderItem.fromJson(x))),
+    orderItems: null,
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );
@@ -56,6 +57,7 @@ class Order {
         "status": OrderStatusValues.reverse[status],
 //        "order_items": new List<dynamic>.from(orderItems.map((x) => x.toJson())),
 //        "order_items" : 1,
+
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
     };
@@ -96,11 +98,24 @@ class OrderItem {
         updatedAt: DateTime.parse(json["updated_at"]),
     );
 
-    Map<String, dynamic> toJson() => {
+    factory OrderItem.fromMap(Map<String, dynamic> json) => new OrderItem(
+      id: json["id"],
+      orderId: json["order_id"],
+      productId: json["product_id"],
+      qty: json["qty"],
+      product: null,
+      status: orderItemStatusValues.map[json["status"]],
+      comment: json["comment"] == null ? null : json["comment"],
+      createdAt: DateTime.parse(json["created_at"]),
+      updatedAt: DateTime.parse(json["updated_at"]),
+    );
+
+    Map<String, dynamic> toMap() => {
         "id": id,
         "order_id": orderId,
         "product_id": productId,
         "qty": qty,
+//      'product' : product.toJson(),
         "status": orderItemStatusValues.reverse[status],
         "comment": comment == null ? null : comment,
         "created_at": createdAt.toIso8601String(),
