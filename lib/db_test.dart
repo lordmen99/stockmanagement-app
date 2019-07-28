@@ -103,15 +103,15 @@ class _HomeState extends State<Home> {
     print(orders.first.toString());
   }
 
-  getAllOrderItems() async {
-    OrderItemProvider orderItemProvider = new OrderItemProvider();
-    await orderItemProvider.open();
-    List<OrderItem> orderitems = await orderItemProvider.getAllOrderItems();
+  // getAllOrderItems() async {
+  //   OrderItemProvider orderItemProvider = new OrderItemProvider();
+  //   await orderItemProvider.open();
+  //   List<OrderItem> orderitems = await orderItemProvider.getAllOrderItems();
 
-    print(orderitems.length);
-    print(orderitems.first.toString());
+  //   print(orderitems.length);
+  //   print(orderitems.first.toString());
 
-  }
+  // }
 
   deletedd() async {
     print("deleting");
@@ -171,7 +171,7 @@ class _HomeState extends State<Home> {
             RaisedButton(
               child: Text("get order items"),
               onPressed: (){
-                getAllOrderItems();
+                // getAllOrderItems();
               },
             ),
             RaisedButton(

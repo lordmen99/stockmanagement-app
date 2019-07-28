@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:stock_app/new_sql_test.dart';
 import 'package:stock_app/pages/profile_page/profile_page.dart';
 import 'package:stock_app/pages/register_page/register_page.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Rubik",
         primarySwatch: Colors.purple,
       ),
-home: Home(),
+home: NewSqlTestPage(),
 //      home: SplashScreen(),//RegisterPage(),//MyHomePage(title: 'Stock Management App'),
     );
   }

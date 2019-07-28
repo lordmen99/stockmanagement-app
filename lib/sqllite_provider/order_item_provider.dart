@@ -64,27 +64,27 @@ class OrderItemProvider {
 
 
 
-  Future<OrderItem> getOrderItem(int id) async {
-    List<Map> maps = await db.query(_tableOrderItem,
-        where: '$_colId = ?',
-        whereArgs: [id]);
-    if (maps.length > 0) {
-      return OrderItem.fromMap(maps.first);
-    }
-//    throw Exception("null");
-    return null;
-  }
+//   Future<OrderItem> getOrderItem(int id) async {
+//     List<Map> maps = await db.query(_tableOrderItem,
+//         where: '$_colId = ?',
+//         whereArgs: [id]);
+//     if (maps.length > 0) {
+//       return OrderItem.fromMap(maps.first);
+//     }
+// //    throw Exception("null");
+//     return null;
+//   }
 
-  Future<List<OrderItem>> getAllOrderItems() async {
-    List<OrderItem> orderItems = List();
-    List<Map> jsonOrders = await db.query(_tableOrderItem);
+  // Future<List<OrderItem>> getAllOrderItems() async {
+  //   List<OrderItem> orderItems = List();
+  //   List<Map> jsonOrders = await db.query(_tableOrderItem);
 
-    jsonOrders.forEach((orderItem){
-      orderItems.add(OrderItem.fromMap(orderItem));
-    });
+  //   jsonOrders.forEach((orderItem){
+  //     orderItems.add(OrderItem.fromMap(orderItem));
+  //   });
 
-    return orderItems;
-  }
+  //   return orderItems;
+  // }
 
   Future<int> deleteOrderItem(int id) async {
     return await db.delete(_tableOrderItem, where: '$_colId = ?', whereArgs: [id]);
