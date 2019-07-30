@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:stock_app/models/orders_list_items.dart';
 import 'package:stock_app/pages/dashboard_page/dashboard_page.dart';
 import 'package:stock_app/pages/welcome_page/welcome_page.dart';
 import 'package:stock_app/pages/home_page/my_home_page.dart';
+import 'package:stock_app/services/api_services.dart';
 import 'package:stock_app/services/db_services.dart';
+import 'package:stock_app/services/file_service.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -23,6 +26,20 @@ class _SplashScreenState extends State<SplashScreen> {
     bool isLoggedIn = await DbServices.userTokenApiIsAvailable();
     if (isLoggedIn) {
       this.token = await DbServices.getUserTokenApi();
+//      try{
+////        OrdersList ordersList =  await getOrdersList(token:token);
+////        if(ordersList!=null){
+////          Map map = ordersList.toJson();
+////
+////          await jsonStorage.writeJsonFile(map.toString());
+////        }
+//
+//
+//      }catch(e){
+//        print(e.toString());
+//      }
+
+
       startTime(() {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => DashboardPage(token: this.token,)));

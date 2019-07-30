@@ -4,6 +4,8 @@ import 'package:stock_app/models/orders_list_items.dart' as model;
 import 'package:stock_app/pages/order_items_page/orders_list_items_page.dart';
 
 import 'package:stock_app/services/api_services.dart';
+import 'package:stock_app/services/check_internet_connection_service.dart';
+import 'package:stock_app/services/file_service.dart';
 import 'package:stock_app/theme/style.dart';
 import 'components/components.dart';
 
@@ -24,10 +26,22 @@ class _OrdersPageState extends State<OrdersPage> {
   Widget build(BuildContext context) {
 //    Future<model.OrdersList> _ordersList = getOrdersList(token: this.token);
 
+    Future<model.OrdersList> getOrdersFromFile() async {
+      if(await checkNetworkConnection(context)){
+        print("first");
+        return await getOrdersList(token: widget.token);
+
+      }else{
+        print("secound");
+        JsonStorage jsonStorage = JsonStorage();
+        return model.ordersListFromJson(await jsonStorage.readJsonFile());
+      }
+    }
+
     return Scaffold(
         backgroundColor: mainColor,
         body: FutureBuilder<model.OrdersList>(
-          future:  getOrdersList(token: widget.token),
+          future:  getOrdersFromFile(),
           builder: (context, AsyncSnapshot  snapshot) {
             if (snapshot.hasError) {
               print(snapshot.error.toString());

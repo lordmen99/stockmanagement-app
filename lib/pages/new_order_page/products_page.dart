@@ -50,7 +50,8 @@ class _ProductPageState extends State<ProductPage> {
                   model.Product product = widget.category.products[index];
                   return CardItem(
                     product: product,
-                  ); // TODO this
+
+                  );
                   return Card(
                     child: Row(
                       children: <Widget>[
@@ -118,10 +119,10 @@ class _ProductPageState extends State<ProductPage> {
 
                     orders.forEach((item){
 //                      print(item.toMap());
-                      Map map = Map.from(item.toMap());
+                      Map map = (item.toMap());
                       items.add(map);
 
-//                      print(map);
+                      print(map);
 //                      print("product id : ${item.productId} , count : ${item.qty}");
                     });
                     _createOrder(context: context, items: items);
@@ -169,15 +170,15 @@ class _CardItemState extends State<CardItem> {
   @override
   void initState() {
     _countEditController.text = "1";
-    this.orderItem = new OrderItem(productId: widget.product.id, qty: int.parse(_countEditController.text));
+    this.orderItem = new OrderItem(productId: int.parse(widget.product.id.toString()), qty: int.parse(_countEditController.text));
     super.initState();
   }
 
-  @override
-  void didUpdateWidget(CardItem oldWidget) {
-    this.orderItem.qty = int.parse(_countEditController.text);
-    super.didUpdateWidget(oldWidget);
-  }
+//  @override
+//  void didUpdateWidget(CardItem oldWidget) {
+//    this.orderItem.qty = int.parse(_countEditController.text);
+//    super.didUpdateWidget(oldWidget);
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +196,7 @@ class _CardItemState extends State<CardItem> {
             orders.remove(orderItem);
           } else {
 //            print("it is not avilable");
-            print(orderItem.productId);
+            print(++ orderItem.productId);
             orders.add(orderItem);
             print(orderItem.qty);
             formKey.currentState.validate();
@@ -257,7 +258,7 @@ class _CardItemState extends State<CardItem> {
                           if (value == null) {
                             return null;
                           }
-                          final n = num.tryParse(value);
+                          final n = num.parse(value);
                           if (n == null) {
                             return '"$value" is not a valid number';
                           }

@@ -5,7 +5,7 @@ Future<bool> checkNetworkConnection(BuildContext context) async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
       print("no connection");
-      _showSnackBar(context);
+//      _showSnackBar(context);
       return false;
     }
     print("intent is ok");

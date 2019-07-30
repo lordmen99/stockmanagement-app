@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
         fontFamily: "Rubik",
         primarySwatch: Colors.purple,
       ),
-home: NewSqlTestPage(),
-//      home: SplashScreen(),//RegisterPage(),//MyHomePage(title: 'Stock Management App'),
+//home: NewSqlTestPage(),
+      home: SplashScreen(),//RegisterPage(),//MyHomePage(title: 'Stock Management App'),
     );
   }
 }

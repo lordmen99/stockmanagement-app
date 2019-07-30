@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 
 Future<Categories> getCategories({String token}) async{
-  final url = "http://10.0.3.2:8000/api/categories";
+  final url = "https://inventory.azaronline.com/public/api/categories";
 
   var response = await http.get(url,headers: {
     'Content-Type' : 'application/json',

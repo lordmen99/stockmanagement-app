@@ -27,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
     var stream = new http.ByteStream(
         DelegatingStream.typed(_imageFiel.openRead()));
     var lenght = await _imageFiel.length();
-    var uri = Uri.parse("http://10.0.3.2:8000/api/profile/upload");
+    var uri = Uri.parse("https://inventory.azaronline.com/public/api/profile/upload");
     var request = http.MultipartRequest("POST", uri);
 
     var multyFile = new http.MultipartFile(

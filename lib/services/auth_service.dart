@@ -5,7 +5,7 @@ import 'dart:io';
 class AuthService {
   static Future<Map> sendLoginRequest({Map body}) async {
     print("sneding login request");
-    final response = await http.post("http://10.0.3.2:8000/api/auth/login",
+    final response = await http.post("https://inventory.azaronline.com/public/api/auth/login",
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
           'Accept': 'application/json'
@@ -21,7 +21,7 @@ class AuthService {
   }
 
   static Future<Map> sendRegisterRequest({Map body}) async {
-    final response = await http.post("http://10.0.3.2:8000/api/auth/register",
+    final response = await http.post("https://inventory.azaronline.com/public/api/auth/register",
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
           'Accept': 'application/json'
